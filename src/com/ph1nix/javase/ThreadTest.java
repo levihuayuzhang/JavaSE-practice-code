@@ -24,11 +24,16 @@ class MyThread extends Thread {
     }
 }
 
-
 public class ThreadTest {
     public static void main(String[] args) {
 
         MyThread thread1 = new MyThread();
         thread1.start();
+
+        for (int i = 0; i < 100; i++) {
+            if (i % 2 == 0) {
+                System.out.println(i + "****main()*****");
+            }
+        }
     }
 }
