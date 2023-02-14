@@ -13,12 +13,23 @@ package com.ph1nix.javase;
  * @create 2023-02-12-3:06 PM
  */
 
-class MyThread extends Thread {
+class EvenNumber extends Thread {
     @Override
     public void run() {
         for (int i = 0; i < 100; i++) {
             if (i % 2 == 0) {
-                System.out.println(i);
+                System.out.println(Thread.currentThread().getName() + ": " + i);
+            }
+        }
+    }
+}
+
+class OddNumber extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            if (i % 2 != 0) {
+                System.out.println(Thread.currentThread().getName() + ": " + i);
             }
         }
     }
@@ -27,12 +38,44 @@ class MyThread extends Thread {
 public class ThreadTest {
     public static void main(String[] args) {
 
-        MyThread thread1 = new MyThread();
-        thread1.start();
+//        EvenNumber thread1 = new EvenNumber();
+//        OddNumber thread2 = new OddNumber();
+//
+////        thread1.run(); // not multi-thread
+//
+//        thread1.start(); // multi-thread (start thread, then run)
+////        thread1.start(); // started thread cannot be executed multi-times
+//        thread2.start(); // multi-thread (start thread, then run)
 
+
+        // Anonymous subclass's anonymous objects
+        new Thread() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    if (i % 2 == 0) {
+                        System.out.println(Thread.currentThread().getName() + ": " + i);
+                    }
+                }
+            }
+        }.start();
+
+        new Thread() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    if (i % 2 != 0) {
+                        System.out.println(Thread.currentThread().getName() + ": " + i);
+                    }
+                }
+            }
+        }.start();
+
+
+        // main thread test
         for (int i = 0; i < 100; i++) {
             if (i % 2 == 0) {
-                System.out.println(i + "****main()*****");
+                System.out.println(Thread.currentThread().getName() + ": " + i);
             }
         }
     }
