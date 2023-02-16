@@ -1,4 +1,4 @@
-package com.ph1nix.javase;
+package com.ph1nix.javase.thread;
 
 /**
  * Multi-Thread Creating, method one: inheritance from Class Thread
